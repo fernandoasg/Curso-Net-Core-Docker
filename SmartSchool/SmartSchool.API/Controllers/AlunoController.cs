@@ -63,5 +63,33 @@ namespace SmartSchool.API.Models
             else
                 return Ok(aluno);
         }
+
+        // api/aluno
+        [HttpPost]
+        public IActionResult Post(Aluno aluno)
+        {
+            return Ok(aluno);
+        }
+
+        // api/aluno
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Aluno aluno)
+        {
+            return Ok(aluno);
+        }
+
+
+        // api/aluno
+        [HttpPatch("{id}")]
+        public IActionResult Patch(int id, Aluno aluno)
+        {
+            return Ok(aluno);
+        }
+        // api/aluno
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            return Ok();
+        }
     }
 }
