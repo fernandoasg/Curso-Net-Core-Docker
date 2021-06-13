@@ -34,17 +34,30 @@ namespace SmartSchool.API.Models
             },
         };
 
-        // GET: api/<AlunoController>
+        // GET: api/Aluno
         [HttpGet]
         public IActionResult Get()
         {
             return Ok(Alunos);
         }
 
-        [HttpGet("{id}")]
+        // GET: api/Aluno/byid/3
+        [HttpGet("byId/{id}")]
         public IActionResult GetById(int id)
         {
             var aluno = Alunos.FirstOrDefault(a => a.Id == id);
+            if (aluno == null)
+                return BadRequest("O Aluno não foi encontrado");
+            else
+                return Ok(aluno);
+        }
+
+        // GET: api/Aluno/byname?nome=Fernando&sobrenome=Augusto
+        [HttpGet("ByName")]
+        public IActionResult GetByName(string nome, string sobrenome)
+        {
+            var aluno = Alunos.FirstOrDefault(
+                a => a.Nome.Contains(nome) && a.Sobrenome.Contains(sobrenome));
             if (aluno == null)
                 return BadRequest("O Aluno não foi encontrado");
             else
