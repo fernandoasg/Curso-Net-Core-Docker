@@ -91,6 +91,7 @@ namespace SmartSchool.API.Models
 
             return Ok(aluno);
         }
+        
         // api/aluno
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
