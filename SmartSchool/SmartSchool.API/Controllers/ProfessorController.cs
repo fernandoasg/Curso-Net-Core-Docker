@@ -15,9 +15,11 @@ namespace SmartSchool.API.Controllers
     public class ProfessorController : ControllerBase
     {
         private readonly DataContext _context;
+        public readonly IRepository _repo;
 
-        public ProfessorController(DataContext context)
+        public ProfessorController(DataContext context, IRepository repo)
         {
+            _repo = repo;
             _context = context;
         }
         // GET: api/Professor
@@ -54,10 +56,13 @@ namespace SmartSchool.API.Controllers
         [HttpPost]
         public IActionResult Post(Professor professor)
         {
-            _context.Add(professor);
-            _context.SaveChanges();
+            _repo.Add(professor);
+            if (_repo.SaveChanges())
+            {
+                return Ok(professor);
+            }
 
-            return Ok(professor);
+            return BadRequest("Professor não cadastrado");
         }
 
         // api/Professor
@@ -65,8 +70,8 @@ namespace SmartSchool.API.Controllers
         public IActionResult Put(int id, Professor professor)
         {
             var prof = _context.Professores.AsNoTracking().FirstOrDefault(a => a.Id == id);
-            
-            if(prof == null)
+
+            if (prof == null)
                 return BadRequest("Professor não encontrado");
 
             _context.Update(professor);
@@ -81,8 +86,8 @@ namespace SmartSchool.API.Controllers
         public IActionResult Patch(int id, Professor professor)
         {
             var prof = _context.Professores.AsNoTracking().FirstOrDefault(a => a.Id == id);
-            
-            if(prof == null)
+
+            if (prof == null)
                 return BadRequest("Professor não encontrado");
 
             _context.Update(professor);
@@ -96,10 +101,10 @@ namespace SmartSchool.API.Controllers
         public IActionResult Delete(int id)
         {
             var prof = _context.Professores.AsNoTracking().FirstOrDefault(a => a.Id == id);
-            
-            if(prof == null)
+
+            if (prof == null)
                 return BadRequest("Professor não encontrado");
-    
+
             _context.Remove(prof);
             _context.SaveChanges();
 
