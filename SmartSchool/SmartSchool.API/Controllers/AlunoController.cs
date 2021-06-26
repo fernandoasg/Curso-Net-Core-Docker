@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartSchool.API.Data;
+using SmartSchool.API.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,18 +17,21 @@ namespace SmartSchool.API.Models
     public class AlunoController : ControllerBase
     {
         public readonly IRepository _repo;
+        private readonly IMapper _mapper;
 
-        public AlunoController(IRepository repo)
+        public AlunoController(IRepository repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
 
         // GET: api/Aluno
         [HttpGet]
         public IActionResult Get()
         {
-            var result = _repo.GetAllAlunos(true);
-            return Ok(result);
+            var alunos = _repo.GetAllAlunos(true);
+
+            return Ok(_mapper.Map<IEnumerable<AlunoDto>>(alunos));
         }
 
         // GET: api/Aluno/3
