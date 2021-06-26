@@ -49,7 +49,7 @@ namespace SmartSchool.API.Models
 
         // api/aluno
         [HttpPost]
-        public IActionResult Post(AlunoDto model)
+        public IActionResult Post(AlunoRegistrarDto model)
         {
             var aluno = _mapper.Map<Aluno>(model);
 
@@ -64,7 +64,7 @@ namespace SmartSchool.API.Models
 
         // api/aluno
         [HttpPut("{id}")]
-        public IActionResult Put(int id, AlunoDto model)
+        public IActionResult Put(int id, AlunoRegistrarDto model)
         {
             var aluno = _repo.GetAlunoById(id);
 
@@ -85,7 +85,7 @@ namespace SmartSchool.API.Models
 
         // api/aluno
         [HttpPatch("{id}")]
-        public IActionResult Patch(int id, AlunoDto model)
+        public IActionResult Patch(int id, AlunoRegistrarDto model)
         {
             var aluno = _repo.GetAlunoById(id);
 

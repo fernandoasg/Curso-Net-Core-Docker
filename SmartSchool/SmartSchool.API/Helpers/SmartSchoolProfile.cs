@@ -18,6 +18,9 @@ namespace SmartSchool.API.Helpers
                     dest => dest.Idade,
                     opt => opt.MapFrom(src => src.DataNasc.GetCurrentAge())
                 );
+
+            CreateMap<AlunoDto, Aluno>();
+            CreateMap<Aluno, AlunoRegistrarDto>().ReverseMap();
         }
     }
 }
