@@ -2,10 +2,22 @@ using System;
 
 namespace SmartSchool.API.DTOs
 {
+    /// <summary>
+    /// Identificador e chave do Banco
+    /// </summary>
     public class AlunoRegistrarDto
     {
-         public int Id { get; set; }
+        /// <summary>
+        /// Identificador e chave do Banco
+        /// </summary>
+        public int Id { get; set; }
+        /// <summary>
+        /// Chave do Aluno, para outros negócios na Instituição
+        /// </summary>
         public int Matricula { get; set; }
+        /// <summary>
+        /// Nome é o Primeiro nome e o Sobrenome do Aluno
+        /// </summary>
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
         public string Telefone { get; set; }
