@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SmartSchool.API.Data;
 using SmartSchool.API.DTOs;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -35,9 +36,9 @@ namespace SmartSchool.API.Models
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var alunos = _repo.GetAllAlunos(true);
+            var alunos = await _repo.GetAllAlunos(true);
 
             return Ok(_mapper.Map<IEnumerable<AlunoDto>>(alunos));
         }

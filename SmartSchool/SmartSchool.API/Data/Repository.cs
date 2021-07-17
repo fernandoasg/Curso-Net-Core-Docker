@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SmartSchool.API.Models;
 
@@ -32,7 +33,7 @@ namespace SmartSchool.API.Data
             return _context.SaveChanges() > 0;
         }
 
-        public Aluno[] GetAllAlunos(bool includeProfessores = false)
+        public async Task<Aluno[]> GetAllAlunos(bool includeProfessores = false)
         {
             IQueryable<Aluno> query = _context.Alunos;
 
@@ -43,7 +44,7 @@ namespace SmartSchool.API.Data
             }
 
             query = query.AsNoTracking().OrderBy(a => a.Id);
-            return query.ToArray();
+            return await query.ToArrayAsync();
         }
 
         public Aluno[] GetAllAlunosByDisciplinaId(int disciplinaId, bool includeProfessores = false)

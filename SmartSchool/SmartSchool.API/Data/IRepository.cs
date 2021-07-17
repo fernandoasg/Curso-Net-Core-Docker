@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using SmartSchool.API.Models;
 
 namespace SmartSchool.API.Data
@@ -10,7 +11,7 @@ namespace SmartSchool.API.Data
         bool SaveChanges();
 
         // Alunos
-        Aluno[] GetAllAlunos(bool includeProfessores = false);
+        Task<Aluno[]> GetAllAlunos(bool includeProfessores = false);
         Aluno[] GetAllAlunosByDisciplinaId(int disciplinaId, bool includeProfessores = false);
         Aluno GetAlunoById(int alunoId, bool includeProfessores = false);
 
