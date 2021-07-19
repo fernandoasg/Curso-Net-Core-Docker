@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SmartSchool.API.Helpers;
 using SmartSchool.API.Models;
 
 namespace SmartSchool.API.Data
@@ -33,7 +35,7 @@ namespace SmartSchool.API.Data
             return _context.SaveChanges() > 0;
         }
 
-        public async Task<Aluno[]> GetAllAlunos(bool includeProfessores = false)
+        public async Task<PageList<Aluno>> GetAllAlunos(bool includeProfessores = false)
         {
             IQueryable<Aluno> query = _context.Alunos;
 
@@ -44,7 +46,8 @@ namespace SmartSchool.API.Data
             }
 
             query = query.AsNoTracking().OrderBy(a => a.Id);
-            return await query.ToArrayAsync();
+            //return await query.ToListAsync();
+            return await PageList<Aluno>.CreateAsync(query, 1, 5);
         }
 
         public Aluno[] GetAllAlunosByDisciplinaId(int disciplinaId, bool includeProfessores = false)
