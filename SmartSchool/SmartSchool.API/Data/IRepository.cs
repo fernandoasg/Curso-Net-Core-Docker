@@ -13,7 +13,7 @@ namespace SmartSchool.API.Data
         bool SaveChanges();
 
         // Alunos
-        Task<PageList<Aluno>> GetAllAlunos(bool includeProfessores = false);
+        Task<PageList<Aluno>> GetAllAlunos(PageParams pageParams, bool includeProfessores = false);
         Aluno[] GetAllAlunosByDisciplinaId(int disciplinaId, bool includeProfessores = false);
         Aluno GetAlunoById(int alunoId, bool includeProfessores = false);
 

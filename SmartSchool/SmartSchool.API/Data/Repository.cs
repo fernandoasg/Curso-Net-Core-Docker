@@ -35,7 +35,9 @@ namespace SmartSchool.API.Data
             return _context.SaveChanges() > 0;
         }
 
-        public async Task<PageList<Aluno>> GetAllAlunos(bool includeProfessores = false)
+        public async Task<PageList<Aluno>> GetAllAlunos(
+            PageParams pageParams,
+            bool includeProfessores = false)
         {
             IQueryable<Aluno> query = _context.Alunos;
 
@@ -47,7 +49,7 @@ namespace SmartSchool.API.Data
 
             query = query.AsNoTracking().OrderBy(a => a.Id);
             //return await query.ToListAsync();
-            return await PageList<Aluno>.CreateAsync(query, 1, 5);
+            return await PageList<Aluno>.CreateAsync(query, pageParams.PageNumber, pageParams.PageSize);
         }
 
         public Aluno[] GetAllAlunosByDisciplinaId(int disciplinaId, bool includeProfessores = false)
