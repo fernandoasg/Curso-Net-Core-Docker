@@ -18,9 +18,11 @@ services:
     networks:
       - mysqlNET
     environment: 
-       - MYSQL_ROOT_PASSWORD=lalaland 
-       - MYSQL_ROOT_HOST=% mysql:5.7
-       - bind-address:0.0.0.0 
+        - MYSQL_USER=ruth 
+        - MYSQL_PASSWORD=lalaland
+        - MYSQL_ROOT_PASSWORD=lalaland 
+        - MYSQL_ROOT_HOST=%
+        - bind-address:0.0.0.0 
 
 
   smartschool:
