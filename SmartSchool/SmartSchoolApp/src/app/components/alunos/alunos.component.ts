@@ -99,7 +99,7 @@ export class AlunosComponent implements OnInit {
   }
 
   carregarAlunos() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const alunoId = Number(this.route.snapshot.paramMap.get('id'));
 
     this.spinner.show();
     this.alunoService.getAll()
@@ -107,9 +107,9 @@ export class AlunosComponent implements OnInit {
       .subscribe((alunos: Aluno[]) => {
         this.alunos = alunos;
 
-        /*if (id > 0) {
-          this.alunoSelect(this.alunos.find(aluno => aluno.id === id));
-        }*/
+        if (alunoId > 0) {
+          this.alunoSelect(alunoId);
+        }
 
         this.toastr.success('Alunos foram carregado com Sucesso!');
       }, (error: any) => {
@@ -120,11 +120,21 @@ export class AlunosComponent implements OnInit {
     );
   }
 
-  alunoSelect(aluno: Aluno) {
+  alunoSelect(alunoId: number) {
     this.modeSave = 'put';
-    this.alunoSelecionado = aluno;
-      this.alunoForm.patchValue(aluno);
-  }
+    this.alunoService.getById(alunoId).subscribe(
+      (alunoReturn) => {
+        this.alunoSelecionado = alunoReturn;
+        this.alunoForm.patchValue(this.alunoSelecionado);
+      },
+      (error) => {
+        this.toastr.error('Aluno não carregado!');
+        console.error(error.message);
+        this.spinner.hide();
+      },
+      () => this.spinner.hide()
+    );
+  };
 
   voltar() {
     this.alunoSelecionado = undefined;
