@@ -102,7 +102,7 @@ namespace SmartSchool.API.Models
 
         // api/aluno
         [HttpPatch("{id}")]
-        public IActionResult Patch(int id, AlunoRegistrarDto model)
+        public IActionResult Patch(int id, AlunoPatchDto model)
         {
             var aluno = _repo.GetAlunoById(id);
 
@@ -114,7 +114,7 @@ namespace SmartSchool.API.Models
             _repo.Update(aluno);
             if (_repo.SaveChanges())
             {
-                return Created($"/api/aluno/{model.Id}", _mapper.Map<AlunoDto>(aluno));                
+                return Created($"/api/aluno/{model.Id}", _mapper.Map<AlunoPatchDto>(aluno));                
             }
 
             return BadRequest("Aluno não atualizado");

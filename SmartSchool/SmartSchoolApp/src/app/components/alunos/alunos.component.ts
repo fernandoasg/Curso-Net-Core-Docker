@@ -28,7 +28,7 @@ export class AlunosComponent implements OnInit {
   public alunos: Aluno[] = [];
   public aluno?: Aluno;
   public msnDeleteAluno: string = '';
-  public modeSave = 'post';
+  public modeSave: string = 'post';
 
   private unsubscriber = new Subject();
 
@@ -82,8 +82,7 @@ export class AlunosComponent implements OnInit {
         this.aluno = {id: this.alunoSelecionado?.id, ...this.alunoForm.value};
       }
 
-      //this.alunoService[this.modeSave](this.aluno)
-      /*this.alunoService(this.aluno)
+      this.alunoService[this.modeSave](this.aluno)
         .pipe(takeUntil(this.unsubscriber))
         .subscribe(
           () => {
@@ -94,7 +93,7 @@ export class AlunosComponent implements OnInit {
             console.error(error.message);
             this.spinner.hide()
           }, () => this.spinner.hide()
-        );*/
+        );
     }
   }
 
@@ -121,7 +120,7 @@ export class AlunosComponent implements OnInit {
   }
 
   alunoSelect(alunoId: number) {
-    this.modeSave = 'put';
+    this.modeSave = 'patch';
     this.alunoService.getById(alunoId).subscribe(
       (alunoReturn) => {
         this.alunoSelecionado = alunoReturn;
