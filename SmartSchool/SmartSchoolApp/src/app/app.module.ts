@@ -16,12 +16,14 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProfessoresAlunosComponent } from './components/alunos/professores-alunos/professores-alunos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AlunosComponent,
     ProfessoresComponent,
+    ProfessoresAlunosComponent,
     PerfilComponent,
     NavComponent,
     TitleComponent,
