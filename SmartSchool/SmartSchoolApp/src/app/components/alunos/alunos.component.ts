@@ -72,6 +72,21 @@ export class AlunosComponent implements OnInit {
     });
   }
 
+  trocarEstado(aluno: Aluno) {
+    this.alunoService.trocarEstado(aluno.id, !aluno.ativo)
+        .pipe(takeUntil(this.unsubscriber))
+        .subscribe(
+          (resp: any) => {
+            this.carregarAlunos();
+            this.toastr.success(resp.message);
+          }, (error: any) => {
+            this.toastr.error(`Erro: Aluno não pode mudar de estado!`);
+            console.error(error.message);
+            this.spinner.hide()
+          }, () => this.spinner.hide()
+        );
+  }
+
   saveAluno() {
     if (this.alunoForm.valid) {
       this.spinner.show();

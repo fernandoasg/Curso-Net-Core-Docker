@@ -120,6 +120,29 @@ namespace SmartSchool.API.Models
             return BadRequest("Aluno não atualizado");
         }
 
+        // api/aluno/{id}/trocarestado
+        [HttpPatch("{id}/trocarestado")]
+        public IActionResult TrocarEstado(int id, TrocaEstadoDto trocaEstado)
+        {
+            var aluno = _repo.GetAlunoById(id);
+
+            if (aluno == null)
+                return BadRequest("Aluno não encontrado");
+
+            aluno.Ativo = trocaEstado.Estado;
+
+            _repo.Update(aluno);
+            if (_repo.SaveChanges())
+            {
+                var msg = aluno.Ativo ? "ativado" : "desativado";
+                return Ok(new {
+                    message = $"Aluno {msg} com sucesso!"
+                });
+            }
+
+            return BadRequest("Aluno não atualizado");
+        }
+
         // api/aluno
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
