@@ -32,7 +32,7 @@ namespace SmartSchool.API.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var professor = _repo.GetProfessorById(id);
+            var professor = _repo.GetProfessorById(id, true);
             if (professor == null)
                 return BadRequest("O Professor não foi encontrado");
             else
