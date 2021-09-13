@@ -47,6 +47,14 @@ namespace SmartSchool.API.Models
             return Ok(alunosResult);
         }
 
+        [HttpGet("ByDisciplina/{id}")]
+        public async Task<IActionResult> GetByDisciplinaId(int id)
+        {
+            var result = await _repo.GetAllAlunosByDisciplinaIdAsync(id, false);
+            return Ok(result);
+        }
+
+
         /// <summary>
         /// Método responsável por retornar apenas um Aluno por seu ID
         /// </summary>
