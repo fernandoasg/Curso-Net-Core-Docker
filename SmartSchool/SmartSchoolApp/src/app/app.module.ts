@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import { AlunosComponent } from './components/alunos/alunos.component';
 import { ProfessoresComponent } from './components/professores/professores.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
@@ -43,6 +44,7 @@ import { ProfessorDetalheComponent } from './components/professores/professor-de
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     NgxSpinnerModule,
+    NgxPaginationModule,
     ToastrModule.forRoot({
       timeOut: 3500,
       positionClass: 'toast-bottom-right',
